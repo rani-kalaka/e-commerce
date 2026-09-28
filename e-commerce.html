@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Mini E-Commerce</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial;
+}
+
+body{
+    background:#f4f4f4;
+}
+
+
+/* Navbar */
+
+header{
+    background:#222;
+    color:white;
+    padding:20px;
+    display:flex;
+    justify-content:space-between;
+}
+
+header h2{
+    color:#00adb5;
+}
+
+
+/* Products */
+
+.container{
+    padding:30px;
+}
+
+.products{
+    display:flex;
+    flex-wrap:wrap;
+    gap:20px;
+    justify-content:center;
+}
+
+
+.card{
+    background:white;
+    width:250px;
+    padding:20px;
+    text-align:center;
+    box-shadow:0 0 10px #ccc;
+    border-radius:10px;
+}
+
+
+.card img{
+    width:150px;
+    height:150px;
+}
+
+
+.card button{
+
+    background:#00adb5;
+    color:white;
+    border:none;
+    padding:10px 20px;
+    cursor:pointer;
+    margin-top:10px;
+}
+
+
+.card button:hover{
+    background:#007b80;
+}
+
+
+/* Cart */
+
+.cart{
+
+    background:white;
+    margin:30px;
+    padding:20px;
+    border-radius:10px;
+
+}
+
+
+.cart-item{
+
+    display:flex;
+    justify-content:space-between;
+    margin:10px;
+
+}
+
+
+.remove{
+
+background:red;
+color:white;
+border:none;
+padding:5px;
+
+}
+
+
+
+/* Mobile */
+
+@media(max-width:600px){
+
+.products{
+
+flex-direction:column;
+align-items:center;
+
+}
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<h2>My Shop</h2>
+
+<h3>
+Cart: <span id="count">0</span>
+</h3>
+
+</header>
+
+
+
+
+<div class="container">
+
+
+<h1>Products</h1>
+
+
+<div class="products">
+
+
+<div class="card">
+
+<img src="https://via.placeholder.com/150">
+
+<h3>Mobile Phone</h3>
+
+<p>Price: ₹15000</p>
+
+<button onclick="addCart('Mobile Phone',15000)">
+Add Cart
+</button>
+
+</div>
+
+
+
+<div class="card">
+
+<img src="https://via.placeholder.com/150">
+
+<h3>Laptop</h3>
+
+<p>Price: ₹50000</p>
+
+<button onclick="addCart('Laptop',50000)">
+Add Cart
+</button>
+
+</div>
+
+
+
+<div class="card">
+
+<img src="https://via.placeholder.com/150">
+
+<h3>Headphones</h3>
+
+<p>Price: ₹2000</p>
+
+<button onclick="addCart('Headphones',2000)">
+Add Cart
+</button>
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+<div class="cart">
+
+<h2>Your Cart</h2>
+
+<div id="cartItems">
+
+</div>
+
+
+<h3>
+Total: ₹<span id="total">0</span>
+</h3>
+
+
+</div>
+
+
+
+
+
+<script>
+
+
+let cart=[];
+
+
+function addCart(product,price){
+
+
+cart.push({
+
+name:product,
+price:price
+
+});
+
+
+displayCart();
+
+
+}
+
+
+
+
+function displayCart(){
+
+
+let items="";
+
+let total=0;
+
+
+cart.forEach((item,index)=>{
+
+
+items += `
+
+<div class="cart-item">
+
+<p>
+${item.name} - ₹${item.price}
+</p>
+
+
+<button class="remove" onclick="removeItem(${index})">
+Remove
+</button>
+
+
+</div>
+
+`;
+
+
+total += item.price;
+
+
+});
+
+
+
+document.getElementById("cartItems").innerHTML=items;
+
+
+document.getElementById("total").innerHTML=total;
+
+
+document.getElementById("count").innerHTML=cart.length;
+
+
+}
+
+
+
+
+function removeItem(index){
+
+
+cart.splice(index,1);
+
+displayCart();
+
+
+}
+
+
+
+</script>
+
+
+</body>
+</html>
